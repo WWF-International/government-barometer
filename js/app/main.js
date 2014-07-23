@@ -1,18 +1,39 @@
 define(["jquery", "d3", "gapi"], function($) {
-    //the jquery.alpha.js and jquery.beta.js plugins have been loaded.
-    $(function() {
-        var bar = new barometer(
-				//'18OLTUYNKvmyyDgIjulFwhSnG0kOgYbic8K4pvU3J', //1j0qHYRu5sT4lU76zozNVeMG3Pz3UaXQ2PkboIHkb', // tableid
-				'AIzaSyAO3KXQiVzbyaEAgDSxSeX2krQAERxJslY'); // apikey
 
-				bar.getQuestion(1,function (status, results) {
-				var i;
-				if (status == "OK") {
-					for(i = 0; i < results.length; i++) {
-						console.log(results[i]);
-					}
-				}},0)
-    });
+    //the d3 and google api client plugins have been loaded.
+	"use strict"
+	var bar = new barometer(
+		//'18OLTUYNKvmyyDgIjulFwhSnG0kOgYbic8K4pvU3J', //1j0qHYRu5sT4lU76zozNVeMG3Pz3UaXQ2PkboIHkb', // tableid
+		'AIzaSyAO3KXQiVzbyaEAgDSxSeX2krQAERxJslY'); // apikey
+
+		bar.getQuestion(1,function (status, results) {
+		var i;
+		if (status == "OK") {
+			for(i = 0; i < results.length; i++) {
+				console.log(results[i]);
+			}
+			var p = d3.select("#results tbody").selectAll("tr")
+				.data(results)
+				.html(function(d){return "<td>" + d.country +"</td><td>" + d.score+ "</td>"})
+
+				p.enter().append("tr")
+				.html(function(d){return "<td>" + d.country +"</td><td>" + d.score+ "</td>"})
+
+
+			
+
+				d3.select("#score").on("click",function(){
+				//	var sResults=bar._utils.sortByProp(results,'score')
+				//	p.data(sResults).html(function(d){return "<td>" + d.country +"</td><td>" + d.score+ "</td>"
+
+				//});
+				p.sort(bar._utils.sortByPropFunc('score'))
+				})
+
+			}
+		}
+	,0)
+
 });
 
        		function barometer(apiKey) {
@@ -104,7 +125,7 @@ define(["jquery", "d3", "gapi"], function($) {
 						
 					};
 
-					if (arguments.length == 3){
+					if (arguments.length === 3){
 						getQuery(sqlArgs,cb,amt);
 					} else {
 						getQuery(sqlArgs, cb);
@@ -124,7 +145,7 @@ define(["jquery", "d3", "gapi"], function($) {
 						
 					};
 
-					if (arguments.length == 3){
+					if (arguments.length === 3){
 						getQuery(sqlArgs,cb,amt);
 					} else {
 						getQuery(sqlArgs, cb);
@@ -144,7 +165,7 @@ define(["jquery", "d3", "gapi"], function($) {
 						where: 'country = ' + "'" +country+"'"
 					};
 
-					if (arguments.length == 3){
+					if (arguments.length === 3){
 						getQuery(sqlArgs,cb,amt);
 					} else {
 						getQuery(sqlArgs, cb);
@@ -164,7 +185,7 @@ define(["jquery", "d3", "gapi"], function($) {
 						where: 'country = ' + "'" +country+"'"
 					};
 
-					if (arguments.length == 3){
+					if (arguments.length === 3){
 						getQuery(sqlArgs,cb,amt);
 					} else {
 						getQuery(sqlArgs, cb);
@@ -184,7 +205,7 @@ define(["jquery", "d3", "gapi"], function($) {
 						where: 'country = ' + "'" +country+"'"
 					};
 
-					if (arguments.length == 3){
+					if (arguments.length === 3){
 						getQuery(sqlArgs,cb,amt);
 					} else {
 						getQuery(sqlArgs, cb);
@@ -204,7 +225,7 @@ define(["jquery", "d3", "gapi"], function($) {
 						where: "'question number' = " +  question 
 					};
 
-					if (arguments.length == 3){
+					if (arguments.length === 3){
 						getQuery(sqlArgs,cb,amt);
 					} else {
 						getQuery(sqlArgs, cb);
@@ -241,6 +262,24 @@ define(["jquery", "d3", "gapi"], function($) {
 						resetdate = null;
 					}
 					lastDate = resetdate;
+				}
+
+				this._utils={};
+
+				this._utils.sortByProp = function(list,prop){
+					var res;
+						res=list.sort(function(a,b){return toIntforSort(b[prop])-toIntforSort(a[prop])});
+					return res;
+				}
+
+				this._utils.sortByPropFunc = function(prop){
+					
+						
+					return function(a,b){return toIntforSort(b[prop])-toIntforSort(a[prop])};
+				}
+
+				function toIntforSort(numberorString){
+					return parseInt(numberorString).toString()===numberorString.toString() ? parseInt(numberorString) : Number.NEGATIVE_INFINITY;
 				}
 
 				// UI functions and data
