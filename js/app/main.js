@@ -20,14 +20,26 @@ define(["jquery", "d3", "gapi"], function($) {
 				.html(function(d){return "<td>" + d.country +"</td><td>" + d.score+ "</td>"})
 
 
-			
-
 				d3.select("#score").on("click",function(){
-				//	var sResults=bar._utils.sortByProp(results,'score')
-				//	p.data(sResults).html(function(d){return "<td>" + d.country +"</td><td>" + d.score+ "</td>"
+					var sortedBy=bar.getSortedBy()
+					var newOrder = "DESC";
+					if (sortedBy.column==="score"){
+						var newOrder = sortedBy.order ==="ASC" ? "DESC" : "ASC"}
+						p.sort(bar._utils.sortByPropFunc('score',newOrder))
+					bar.setSortedBy({column:"score",order:newOrder})
 
-				//});
-				p.sort(bar._utils.sortByPropFunc('score'))
+					
+				})
+
+				d3.select("#country").on("click",function(){
+					var sortedBy=bar.getSortedBy()
+					console.log(sortedBy)
+					var newOrder = "ASC";
+					if (sortedBy.column==="country"){
+						var newOrder = sortedBy.order ==="ASC" ? "DESC" : "ASC"}
+						p.sort(bar._utils.sortByPropFunc('country',newOrder))
+					bar.setSortedBy({column:"country",order:newOrder})
+
 				})
 
 			}
@@ -43,10 +55,13 @@ define(["jquery", "d3", "gapi"], function($) {
 				var lastDate = null;
 				var ui_parent = null;
 				var tables= {countryInfo:'1CNENI_tWA8VKB69Z5G__1th3tavlOtw8KNyUTp9A', answerJOINquestions:'1EZYLsZFLj6ZdzvP8TIl4NCmbxn0Gsx8_ykaXdQPK'}
+				var sortedBy = null;
 
 				gapi.client.setApiKey(apiKey);
 
-				
+				this.getSortedBy=function(){return sortedBy}
+				this.setSortedBy=function(newVal){sortedBy=newVal;}
+
 				function makeSql(params) {
 					var args;
 					if (!params.cmd || !params.tableid) {
@@ -230,7 +245,7 @@ define(["jquery", "d3", "gapi"], function($) {
 					} else {
 						getQuery(sqlArgs, cb);
 					}
-
+					sortedBy = {column:"country",order:"ASC"}
 
 				}				
 
@@ -272,10 +287,14 @@ define(["jquery", "d3", "gapi"], function($) {
 					return res;
 				}
 
-				this._utils.sortByPropFunc = function(prop){
-					
-						
-					return function(a,b){return toIntforSort(b[prop])-toIntforSort(a[prop])};
+				this._utils.sortByPropFunc = function(prop,order){
+					var swap=1;
+					if (order === "DESC")	{swap=-1}
+					if (prop==="score"){
+						return function(a,b){return swap*(toIntforSort(b[prop])-toIntforSort(a[prop]))};
+					}else{
+						return function(a,b){return swap===-1? (b[prop] > a[prop]) : !(b[prop] > a[prop])};
+					}	
 				}
 
 				function toIntforSort(numberorString){
