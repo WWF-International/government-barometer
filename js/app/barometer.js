@@ -85,6 +85,7 @@ define(["gapi"], function() {
                 var column=columns[i];
                 d3.select(column.columnSelector).on("click",clickHandler(passThis,column,p));
             }
+        if (typeof cb==="function") {cb();}
         };
 
         function buildCells(columns){
