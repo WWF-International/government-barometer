@@ -1,4 +1,4 @@
-define(["jquery", "d3", "gapi"], function($) {
+define(["jquery", "gapi"], function($) {
 
        		function barometer(apiKey) {
 				"use strict";
@@ -106,13 +106,13 @@ define(["jquery", "d3", "gapi"], function($) {
 
 					sqlArgs = {
 						cmd    : 'select',
-						tableid: tables.scoresByCountry,
+						tableid: tables.countryInfo,
 						cols   : ['country', 'score'],
 						orderby: "score DESC",
 						
 					};
 
-					if (arguments.length === 3){
+					if (arguments.length === 2){
 						getQuery(sqlArgs,cb,amt);
 					} else {
 						getQuery(sqlArgs, cb);

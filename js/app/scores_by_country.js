@@ -6,7 +6,7 @@ define(["d3","app/barometer"], function(d3,bar) {
 		//'18OLTUYNKvmyyDgIjulFwhSnG0kOgYbic8K4pvU3J', //1j0qHYRu5sT4lU76zozNVeMG3Pz3UaXQ2PkboIHkb', // tableid
 //		'AIzaSyAO3KXQiVzbyaEAgDSxSeX2krQAERxJslY'); // apikey
 
-		bar.getQuestion(1,function (status, results) {
+		bar.getScoresByCountry(function (status, results) {
 		var i;
 		if (status == "OK") {
 			for(i = 0; i < results.length; i++) {
