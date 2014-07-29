@@ -1,4 +1,4 @@
-define(["gapi"], function() {
+define(["d3","gapi"], function() {
 
     function barometer(apiKey) {
         //"use strict";
@@ -6,7 +6,7 @@ define(["gapi"], function() {
         var columns = [ "Country", "ID" ];
         var lastDate = null;
         var ui_parent = null;
-        var tables= {countryInfo:'1CNENI_tWA8VKB69Z5G__1th3tavlOtw8KNyUTp9A', answerJOINquestions:'1EZYLsZFLj6ZdzvP8TIl4NCmbxn0Gsx8_ykaXdQPK'};
+        var tables= {countryInfo:'1h19xVanuk4h_17Sok8PiEmNBxkfofKErWDIHqI19', answerJOINquestions:'1EZYLsZFLj6ZdzvP8TIl4NCmbxn0Gsx8_ykaXdQPK'};
         var sortedBy = null;
 
         gapi.client.setApiKey(apiKey);
@@ -76,10 +76,12 @@ define(["gapi"], function() {
             passThis=this;
             var p = d3.select(target).selectAll("tr")
             .data(results)
-            .html(buildCells(columns));
+            .html(buildCells(columns))
+            .attr("class",function(d){return "tier" + parseInt(d.tier) ;});
 
             p.enter().append("tr")
-            .html(buildCells(columns));
+            .html(buildCells(columns))
+            .attr("class",function(d){return "tier" + parseInt(d.tier) ;});
 
             for (i=0;i<columns.length;i++){ 
                 var column=columns[i];
@@ -103,7 +105,7 @@ define(["gapi"], function() {
                 if (sortedBy.column===column.columnName){
                     newOrder = sortedBy.order ==="ASC" ? "DESC" : "ASC";
                 }
-                p.sort(passThis._utils.sortByPropFunc(column.columnName,newOrder));
+                p.sort(passThis._utils.sortByPropFunc(column,newOrder));
                 sortedBy={column:column.columnName,order:newOrder};
             };
         }
@@ -139,7 +141,7 @@ define(["gapi"], function() {
             sqlArgs = {
                 cmd    : 'select',
                 tableid: tables.countryInfo,
-                cols   : ['country', 'score'],
+                cols   : ['country', 'score','y2012', 'y2007','y2006','tier'],
                 orderby: "score DESC",
                 
             };
@@ -271,18 +273,19 @@ define(["gapi"], function() {
             return res;
         };
 
-        this._utils.sortByPropFunc = function(prop,order){
+        this._utils.sortByPropFunc = function(column,order){
             var swap=1;
+            var prop = column.columnName;
             if (order === "DESC")   {swap=-1;}
-            if (prop==="score"){
+            if (column.sortType!=="alpha"){
                 return function(a,b){return swap*(toIntforSort(a[prop])-toIntforSort(b[prop]));};
             }else{
-                return function(a,b){return swap===-1? (b[prop] > a[prop]) : (b[prop] < a[prop]);};
+                return function(a,b){return swap===-1? (b[prop].toLowerCase() > a[prop].toLowerCase()) : (b[prop].toLowerCase() < a[prop].toLowerCase());};
             }   
         };
 
         function toIntforSort(numberorString){
-            return parseInt(numberorString).toString()===numberorString.toString() ? parseInt(numberorString) : Number.NEGATIVE_INFINITY;
+            return parseFloat(numberorString).toString()===numberorString.toString() ? parseFloat(numberorString) : Number.NEGATIVE_INFINITY;
         }
 
 

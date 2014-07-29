@@ -1,4 +1,4 @@
-define(["d3","app/barometer"], function(d3,bar) {
+define(["app/barometer"], function(bar) {
 
     //the d3 and the barometer (with dependencies) have been loaded.
 	"use strict";
@@ -9,8 +9,14 @@ define(["d3","app/barometer"], function(d3,bar) {
 		/*	for(i = 0; i < results.length; i++) {
 				console.log(results[i]);
 			}*/
-		var columns=[{columnName:"country",columnSelector:"#country",defaultOrder:"ASC"},
-			{columnName:"score",columnSelector:"#score",defaultOrder:"DESC"}]	;
+		var columns=[
+			{columnName:"country",columnSelector:"#country",defaultOrder:"ASC",sortType:"alpha"},
+			{columnName:"score",columnSelector:"#score",defaultOrder:"DESC"},
+			{columnName:"y2012",columnSelector:"#y2012",defaultOrder:"DESC"},
+			{columnName:"y2007",columnSelector:"#y2007",defaultOrder:"DESC"},
+			{columnName:"y2006",columnSelector:"#y2006",defaultOrder:"DESC"},
+			
+			]	;
 		
 		bar.outputResults("#results tbody",results,columns );
 		

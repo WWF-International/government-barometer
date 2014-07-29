@@ -15,13 +15,18 @@
                 require(['app/scores_by_country']);
             });
         </script>
+    <style>
+        .tier1{background-color: red}
+        .tier2{background-color: yellow}
+        .tier3{background-color: green}
+    </style>
     </head>
     <body>
         <h1>Scores by Country</h1>
         <p>Look at source or inspect the DOM to see how it works.</p>
         <table id="results">
         	<thead>
-        		<tr><td id="country">Country</td><td id="score">Score</td></tr>
+        		<tr><td id="country">Country</td><td id="score">Score</td><td id="y2012">2012</td><td id="y2007">2007</td><td id="y2006">2006</td></tr>
         	</thead>
         	<tbody>
         		<tr><td>Loading</td></tr>
