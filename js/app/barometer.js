@@ -94,7 +94,11 @@ define(["d3","gapi"], function() {
             return function(d) {
                 var str=""; 
                 for (i=0;i<columns.length;i++){
-                    str=str+ "<td>" +d[columns[i].columnName]+"</td>" ;
+                    if (typeof columns[i].linkUrl ==="string" ){
+                        str=str+ '<td><a href="' +columns[i].linkUrl +'?'+columns[i].linkParams.param + '='+ d[columns[i].linkParams.value]+ '">' + d[columns[i].columnName] +'</a></td>'
+                    }else{
+                       str=str+ "<td>" +d[columns[i].columnName]+"</td>" 
+                    };
                 } return str;
             };
         }
@@ -102,11 +106,13 @@ define(["d3","gapi"], function() {
         function clickHandler(passThis,column,p){
             return function(){
                 var newOrder = column.defaultOrder;
-                if (sortedBy.column===column.columnName){
+                var sortColumn = column.sortType==="delegated" ? column.sortProxy : column.columnName ;
+
+                if (sortedBy.column===sortColumn){
                     newOrder = sortedBy.order ==="ASC" ? "DESC" : "ASC";
                 }
                 p.sort(passThis._utils.sortByPropFunc(column,newOrder));
-                sortedBy={column:column.columnName,order:newOrder};
+                sortedBy={column:sortColumn,order:newOrder};
             };
         }
 
@@ -161,7 +167,7 @@ define(["d3","gapi"], function() {
             sqlArgs = {
                 cmd    : 'select',
                 tableid: tables.answerJOINquestions,
-                cols   : ['abstract', 'score'],
+                cols   : ['abstract', 'score',"'question number'"],
                 orderby: "'question number' ASC",
                 where: 'country = ' + "'" +country+"'"
             };
@@ -171,7 +177,7 @@ define(["d3","gapi"], function() {
             } else {
                 getQuery(sqlArgs, cb);
             }
-
+            sortedBy = {column:"question number",order:"ASC"};
 
         };
 
@@ -277,6 +283,7 @@ define(["d3","gapi"], function() {
             var swap=1;
             var prop = column.columnName;
             if (order === "DESC")   {swap=-1;}
+            if (column.sortType==="delegated"){prop=column.sortProxy};
             if (column.sortType!=="alpha"){
                 return function(a,b){return swap*(toIntforSort(a[prop])-toIntforSort(b[prop]));};
             }else{

@@ -3,18 +3,16 @@ define(["app/barometer"], function(bar) {
     //the d3 and the barometer (with dependencies) have been loaded.
 	"use strict";
 
-	bar.getScoresByCountry(function (status, results) {
+	bar.getCountryScores("Germany",function (status, results) {
 		var i;
 		if (status == "OK") {
 		/*	for(i = 0; i < results.length; i++) {
 				console.log(results[i]);
 			}*/
 		var columns=[
-			{columnName:"country",columnSelector:"#country",defaultOrder:"ASC",sortType:"alpha",linkUrl:"country_scores.html",linkParams:{param:"country",value:"country"}},
+			{columnName:"abstract",columnSelector:"#abstract",defaultOrder:"ASC",sortType:"delegated",sortProxy:"question number"},
 			{columnName:"score",columnSelector:"#score",defaultOrder:"DESC"},
-			{columnName:"y2012",columnSelector:"#y2012",defaultOrder:"DESC"},
-			{columnName:"y2007",columnSelector:"#y2007",defaultOrder:"DESC"},
-			{columnName:"y2006",columnSelector:"#y2006",defaultOrder:"DESC"},
+
 			
 			]	;
 		
