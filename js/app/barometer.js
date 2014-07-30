@@ -95,10 +95,10 @@ define(["d3","gapi"], function() {
                 var str=""; 
                 for (i=0;i<columns.length;i++){
                     if (typeof columns[i].linkUrl ==="string" ){
-                        str=str+ '<td><a href="' +columns[i].linkUrl +'?'+columns[i].linkParams.param + '='+ d[columns[i].linkParams.value]+ '">' + d[columns[i].columnName] +'</a></td>'
+                        str=str+ '<td><a href="' +columns[i].linkUrl +'?'+columns[i].linkParams.param + '='+ d[columns[i].linkParams.value]+ '">' + d[columns[i].columnName] +'</a></td>';
                     }else{
-                       str=str+ "<td>" +d[columns[i].columnName]+"</td>" 
-                    };
+                       str=str+ "<td>" +d[columns[i].columnName]+"</td>" ;
+                    }
                 } return str;
             };
         }
@@ -274,17 +274,16 @@ define(["d3","gapi"], function() {
         this._utils={};
 
         this._utils.GetQueryVariable = function (query, name) {
-    if (query.indexOf("?") == 0) { query = query.substr(1); }
+    if (query.indexOf("?") === 0) { query = query.substr(1); }
     var pairs = query.split("&");
     for (var i = 0; i < pairs.length; i++) {
         var pair = pairs[i].split("=");
-        console.log(pair[0],name)
         if (pair[0] == name) {
             return pair[1];
         }
     }
     return "";
-}
+};
 
 
         this._utils.sortByProp = function(list,prop){
@@ -297,7 +296,7 @@ define(["d3","gapi"], function() {
             var swap=1;
             var prop = column.columnName;
             if (order === "DESC")   {swap=-1;}
-            if (column.sortType==="delegated"){prop=column.sortProxy};
+            if (column.sortType==="delegated"){prop=column.sortProxy;}
             if (column.sortType!=="alpha"){
                 return function(a,b){return swap*(toIntforSort(a[prop])-toIntforSort(b[prop]));};
             }else{

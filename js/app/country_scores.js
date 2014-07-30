@@ -4,7 +4,7 @@ define(["app/barometer"], function(bar) {
 	"use strict";
 
 	var country = decodeURIComponent(bar._utils.GetQueryVariable(location.search,"country"));
-	country = country || "United Kingdom"
+	country = country || "United Kingdom";
 
 	bar.getCountryScores(country,function (status, results) {
 		var i;
