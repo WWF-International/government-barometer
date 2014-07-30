@@ -3,9 +3,10 @@ define(["app/barometer"], function(bar) {
     //the d3 and the barometer (with dependencies) have been loaded.
 	"use strict";
 
+	var country = decodeURIComponent(bar._utils.GetQueryVariable(location.search,"country"));
+	country = country || "United Kingdom"
 
-
-	bar.getCountryScores(decodeURIComponent(bar._utils.GetQueryVariable(location.search,"country")),function (status, results) {
+	bar.getCountryScores(country,function (status, results) {
 		var i;
 		if (status == "OK") {
 		/*	for(i = 0; i < results.length; i++) {
