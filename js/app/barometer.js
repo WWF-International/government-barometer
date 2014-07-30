@@ -77,11 +77,11 @@ define(["d3","gapi"], function() {
             var p = d3.select(target).selectAll("tr")
             .data(results)
             .html(buildCells(columns))
-            .attr("class",function(d){return "tier" + parseInt(d.tier) ;});
+            .attr("class",function(d){return d.tier ? "tier" + parseInt(d.tier) : null;});
 
             p.enter().append("tr")
             .html(buildCells(columns))
-            .attr("class",function(d){return "tier" + parseInt(d.tier) ;});
+            .attr("class",function(d){return d.tier ? "tier" + parseInt(d.tier) : null;});
 
             for (i=0;i<columns.length;i++){ 
                 var column=columns[i];

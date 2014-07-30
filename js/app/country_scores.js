@@ -27,7 +27,3 @@ define(["app/barometer"], function(bar) {
 
 });
 
-// target, columns:sortIds, default order
-// select target
-// for each column output a cell
-// for each colum output a sort 
