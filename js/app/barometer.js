@@ -273,6 +273,20 @@ define(["d3","gapi"], function() {
 
         this._utils={};
 
+        this._utils.GetQueryVariable = function (query, name) {
+    if (query.indexOf("?") == 0) { query = query.substr(1); }
+    var pairs = query.split("&");
+    for (var i = 0; i < pairs.length; i++) {
+        var pair = pairs[i].split("=");
+        console.log(pair[0],name)
+        if (pair[0] == name) {
+            return pair[1];
+        }
+    }
+    return "";
+}
+
+
         this._utils.sortByProp = function(list,prop){
             var res;
             res=list.sort(function(a,b){return toIntforSort(b[prop])-toIntforSort(a[prop]);});
