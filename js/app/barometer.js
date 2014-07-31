@@ -92,6 +92,7 @@ define(["d3","gapi"], function() {
 
         function buildCells(columns){
             return function(d) {
+                
                 var str=""; 
                 for (i=0;i<columns.length;i++){
                     if (typeof columns[i].linkUrl ==="string" ){
@@ -207,7 +208,7 @@ define(["d3","gapi"], function() {
             sqlArgs = {
                 cmd    : 'select',
                 tableid: tables.answerJOINquestions,
-                cols   : ['question', 'answer', 'totalScore', 'comment'],
+                cols   : ['question', 'answer', 'totalScore', 'comment', "'question number'"],
                 orderby: "'question number' ASC",
                 where: 'country = ' + "'" +country+"'"
             };
@@ -217,7 +218,7 @@ define(["d3","gapi"], function() {
             } else {
                 getQuery(sqlArgs, cb);
             }
-
+            sortedBy = {column:"question number",order:"ASC"};
 
         };
 
