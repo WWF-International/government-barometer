@@ -6,7 +6,7 @@ define(["app/barometer"], function(bar) {
 	var country = decodeURIComponent(bar._utils.GetQueryVariable(location.search,"country"));
 	country = country || "United Kingdom";
 
-	bar.getCountryAnswers(country,function (status, results) {
+	bar.getScoresbyIssues(country,function (status, results) {
 		var i;
 		if (status == "OK") {
 		/*	for(i = 0; i < results.length; i++) {
@@ -14,7 +14,7 @@ define(["app/barometer"], function(bar) {
 			}*/
 		var columns=[
 			{columnName:"question",columnSelector:"#question",defaultOrder:"ASC",sortType:"delegated",sortProxy:"question number",linkUrl:"question.html",linkParams:{param:"issue",value:"question number"}},
-			{columnName:"score",columnSelector:"#score",defaultOrder:"DESC"}
+			{columnName:"totalScore",columnSelector:"#score",defaultOrder:"DESC"}
 			
 			]	;
 		
