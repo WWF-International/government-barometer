@@ -87,8 +87,16 @@ define(["d3","gapi"], function() {
                 var column=columns[i];
                 d3.select(column.columnSelector).on("click",clickHandler(passThis,column,p));
             }
-        if (typeof cb==="function") {cb();}
+            if (typeof cb==="function") {cb();}
         };
+
+        this.outputInfo = function(target, results, cb){
+            var p = d3.select(target)
+                .data(results)
+                .text(function(d){console.log(d);return d.description})
+
+            if (typeof cb==="function") {cb();}
+        }
 
         function buildCells(columns){
             return function(d) {
@@ -240,7 +248,20 @@ define(["d3","gapi"], function() {
             }
             sortedBy = {column:"country",order:"ASC"};
 
-        };  
+        };
+
+        this.getCountryInfo  = function(country, cb){
+            var sqlArgs;
+
+            sqlArgs = {
+                cmd    : 'select',
+                tableid: tables.countryInfo,
+                cols   : ['description', 'score'],
+                where: "country ='"  +  country + "'"
+            };
+
+            getQuery(sqlArgs, cb);
+        }
 
         function getQuery (sqlArgs, cb, amt){
             var req;

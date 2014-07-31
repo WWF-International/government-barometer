@@ -19,11 +19,28 @@ define(["app/barometer"], function(bar) {
 			
 			]	;
 		
-		bar.outputResults("#results tbody",results,columns );
-		
+		bar.outputResults("#results tbody",results,columns);
+
 		}
+		bar.getCountryInfo(country,function(status,results){
+		console.log(status, results)
+		if (status == "OK") {
+			bar.outputInfo("#info", results )
+		}
+	})
 
 	},0);
 
+
+
 });
 
+/*
+		bar.getCountryInfo(country,function(status,results){
+		console.log('gotifo')
+		if (status == "OK") {
+			bar.outputInfo("#info", results )
+		}
+	})
+
+	*/
