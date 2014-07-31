@@ -6,7 +6,7 @@ define(["d3","gapi"], function() {
         var columns = [ "Country", "ID" ];
         var lastDate = null;
         var ui_parent = null;
-        var tables= {countryInfo:'1h19xVanuk4h_17Sok8PiEmNBxkfofKErWDIHqI19', answerJOINquestions:'1EZYLsZFLj6ZdzvP8TIl4NCmbxn0Gsx8_ykaXdQPK'};
+        var tables= {countryInfo:'1h19xVanuk4h_17Sok8PiEmNBxkfofKErWDIHqI19', answerJOINquestions:'1EZYLsZFLj6ZdzvP8TIl4NCmbxn0Gsx8_ykaXdQPK', questionInfo:"1d8fFmoP97hvBR7ZXKOSit6k0EpLEVSoF8Hs2TQkk"};
         var sortedBy = null;
 
         gapi.client.setApiKey(apiKey);
@@ -90,10 +90,10 @@ define(["d3","gapi"], function() {
             if (typeof cb==="function") {cb();}
         };
 
-        this.outputInfo = function(target, results, cb){
+        this.outputInfo = function(target, results, prop, cb){
             var p = d3.select(target)
                 .data(results)
-                .text(function(d){console.log(d);return d.description})
+                .text(function(d){console.log(d);return d[prop]})
 
             if (typeof cb==="function") {cb();}
         }
@@ -258,6 +258,19 @@ define(["d3","gapi"], function() {
                 tableid: tables.countryInfo,
                 cols   : ['description', 'score'],
                 where: "country ='"  +  country + "'"
+            };
+
+            getQuery(sqlArgs, cb);
+        }
+
+        this.getQuestionInfo  = function(question, cb){
+            var sqlArgs;
+
+            sqlArgs = {
+                cmd    : 'select',
+                tableid: tables.questionInfo,
+                cols   : ['comment'],
+                where: "'question number' ="  +  question 
             };
 
             getQuery(sqlArgs, cb);

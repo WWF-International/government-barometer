@@ -18,14 +18,14 @@ define(["app/barometer"], function(bar) {
 
 			
 			]	;
-		
+		var prop="description";
 		bar.outputResults("#results tbody",results,columns);
 
 		}
 		bar.getCountryInfo(country,function(status,results){
 		console.log(status, results)
 		if (status == "OK") {
-			bar.outputInfo("#info", results )
+			bar.outputInfo("#info", results, prop )
 		}
 	})
 

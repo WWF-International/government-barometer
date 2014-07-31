@@ -17,11 +17,18 @@ define(["app/barometer"], function(bar) {
 			{columnName:"score",columnSelector:"#score",defaultOrder:"DESC"}
 			
 			]	;
+		var prop = "comment"	
 		
 		bar.outputResults("#results tbody",results,columns );
 		
 		}
+		bar.getQuestionInfo(question,function(status,results){
+			console.log(status, results)
+			if (status == "OK") {
+				bar.outputInfo("#info", results, prop )}
+			})
 
+				
 	},0);
 
 });
