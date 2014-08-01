@@ -1,4 +1,4 @@
-define(["app/barometer"], function(bar) {
+define(["config", "app/barometer"], function(config,bar) {
 
     //the d3 and the barometer (with dependencies) have been loaded.
 	"use strict";
@@ -10,7 +10,7 @@ define(["app/barometer"], function(bar) {
 				console.log(results[i]);
 			}*/
 		var columns=[
-			{columnName:"country",columnSelector:"#country",defaultOrder:"ASC",sortType:"alpha",linkUrl:"country_scores.html",linkParams:{param:"country",value:"country"}},
+			{columnName:"country",columnSelector:"#country",defaultOrder:"ASC",sortType:"alpha",linkUrl:config.linkUrl,linkParams:{param:"country",value:"country"}},
 			{columnName:"score",columnSelector:"#score",defaultOrder:"DESC"},
 			{columnName:"y2012",columnSelector:"#y2012",defaultOrder:"DESC"},
 			{columnName:"y2007",columnSelector:"#y2007",defaultOrder:"DESC"},
