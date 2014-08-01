@@ -333,9 +333,14 @@ define(["d3","gapi"], function() {
             if (order === "DESC")   {swap=-1;}
             if (column.sortType==="delegated"){prop=column.sortProxy;}
             if (column.sortType!=="alpha"){
-                return function(a,b){return swap*(toIntforSort(a[prop])-toIntforSort(b[prop]));};
+                return function(a,b){return swap * (toIntforSort(a[prop]) - toIntforSort(b[prop])) };
             }else{
-                return function(a,b){return swap===-1? (b[prop].toLowerCase() > a[prop].toLowerCase()) : (b[prop].toLowerCase() < a[prop].toLowerCase());};
+                return function(a,b){
+                    var ret = 0;
+                    if (a[prop].toLowerCase() < b[prop].toLowerCase()) {ret = -1;}
+                    if (a[prop].toLowerCase() > b[prop].toLowerCase()) {ret = 1;}
+                    return swap * ret;
+                };
             }   
         };
 
