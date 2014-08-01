@@ -1,6 +1,6 @@
 <script src="//assets.wwf.org.uk/custom/js/lib/require.js"></script>
 <script>
-    define('config',function(){return{linkUrl:"country_scores.html#"};})
+    define('config',function(){return{linkUrl:"country_scores.cfm"};})
     //Load common code that includes config, then load the app
     //logic for this page. Do the require calls here instead of
     //a separate file so after a build there are only 2 HTTP
