@@ -1,50 +1,28 @@
-<cfparam name="url.bar_year" default="2012">
-<cfobject name="barometer" component="#request.rootCFC#.barometer_scores">
-<cfset CTquery=barometer.getIssueTotals(url.bar_year)>
-<cfif request.bPublic>
-  <cfset qString="?">
-<cfelse>
-  <cfset qString="&">
-</cfif>    
- <h2>Scores by issues</h2>
-	
-<table cellspacing="0" cellpadding="0" border="0" class="bodytext">
-<tbody>
+<script src="//assets.wwf.org.uk/custom/js/lib/require.js"></script>
+<cfoutput>
+<script>
+    define('config',function(){return{linkUrl:"#getCMSLink(3303)#"};})
+    //Load common code that includes config, then load the app
+    //logic for this page. Do the require calls here instead of
+    //a separate file so after a build there are only 2 HTTP
+    //requests instead of three.
+    require(['//assets.wwf.org.uk/custom/js/barometer/common.js'], function (common) {
+        //js/common sets the baseUrl to be js/ so
+        //can just ask for 'app/main1' here instead
+        //of 'js/app/main1'
+        require(['app/scores_by_issues']);
+    });
+</script>
+</cfoutput>
 
-	<tr style="font-weight:bold;">
-		<td style="color:#01673E;"><p>Question</p></td>
-		<td width="96" align="center" style="color:#01673E;"><p>Score</p></td>
+<table cellspacing="0" cellpadding="0" border="0" class="bodytext" id="results">
+
+	<thead>
+		<tr style="font-weight:bold;">
+			<th style="color:#01673E;" id="question">Question</th><th width="96" align="center" style="color:#01673E;" id="score">Score</th>
 	</tr>
-	<cfloop query="CTquery">
-  	<cfoutput>
-        <tr>
-		<td width="320">
-		<p>
-			 <a href="#getCMSLink(3303)##qString#bar_doc_id=#CTquery.docID#">#CTquery.abstract#</a>
-		</p> 
-		</td>
-		<td width="96" align="center">#numberFormat(CTquery.totalScore,'_._')#</td>
-		<td>
-		</cfoutput>
-            	<cfset gifadd="">
-		<cfif #numberFormat(CTquery.totalScore,'_._')# lt 37 && #numberFormat(CTquery.totalScore,'_._')# gte 19>
-		<cfset gifadd="http://assets.wwf.org.uk/img/normal/yellowsmall.gif">
-		<cfelseif #numberFormat(CTquery.totalScore,'_._')# gt 36>
-		<cfset gifadd="http://assets.wwf.org.uk/img/normal/greensmall.gif">
-		<cfelse>
-		<cfset gifadd="http://assets.wwf.org.uk/img/normal/redsmall.gif">
-		</cfif> 
-		<cfoutput>
-		    <img src="#gifadd#" style="border:0px;float:left;margin:0;"/>
-		</cfoutput>
-            <cfoutput>
-		</td>
-        </tr>
-        </cfoutput>
-	</cfloop>
-
-</tbody></table>
-
-       
-<!---<cfdump var="#CTquery#">--->
-<!---<cfdump var="#legacyScores#">---> 
+	</thead>
+	<tbody>
+		<tr><Loading</td>
+	</tbody>
+</table>
