@@ -1,4 +1,16 @@
-<head>
+<script src="//assets.wwf.org.uk/custom/js/lib/require.js"></script>
+<script>
+    //Load common code that includes config, then load the app
+    //logic for this page. Do the require calls here instead of
+    //a separate file so after a build there are only 2 HTTP
+    //requests instead of three.
+    require(['//assets.wwf.org.uk/custom/js/barometer/common.js'], function (common) {
+        //js/common sets the baseUrl to be js/ so
+        //can just ask for 'app/main1' here instead
+        //of 'js/app/main1'
+        require(['app/country_answers']);
+    });
+</script>
 <style type="text/css">
 table.TBcountryanwser,table.TBcountryanwser td,table.TBcountryanwser th
 {
@@ -7,67 +19,20 @@ padding-right:5px;
 border:1px solid black;
 }
 </style>
-<cfparam name="url.bar_year" default="2012">
-<cfparam name="url.bar_country_id" default="6">
-<cfobject name="barometer" component="#request.rootCFC#.barometer_scores">
-<cfset CTquery=barometer.getCountryDetails(url.bar_year,url.bar_country_id)>
+
 
 <div class="bodytext">
-<table class="TBcountryanwser">
+<table class="TBcountryanwser" id="results">
 	
 	  <thead>
 	    <tr>
-	      <th><p>
-		<b>Question</b>
-		</p></th>
-	      <th><p>
-		<b>Answering option selected</b>
-		</p></th>
-	      <th><p>
-		<b>Score</b>
-		</p></th>
-	      <th><p>
-		<b>Comments</b>
-		</p></th>	
+	      <th id="question">Question</th><th id="answer">Answering option selected</th><th id="score">Score</th><th id="comments">Comments</th>	
 	    </tr>
 	  </thead>
 	<tbody>
-		<tr>
-			
-			<td valign="top" colspan="4">
-			<p>
-			<b>FLEGT:</b>
-			</p>
-			</td>
-		</tr>
-		<cfset total_score = 0>     
-		<cfloop query="CTquery">
-			<cfset total_score = total_score+CTquery.score>  
-		  	<cfoutput>
-			        <tr>
-					<td width="270" valign="top">
-						<p>
-							#CTquery.questionDescription#
-						</p> 
-					</td>
-					<td width="45" valign="top">
-						<p align="center">
-				                #CTquery.sel_opt#
-						</p>
-			                </td>
-					<td width="50" valign="top">
-						 <p align="center">
-				                 #numberFormat(CTquery.score,'_._')#
-						 </p>
-			                </td>
-					<td width="290" valign="top">    
-						<p align="left"> 
-						 #CTquery.comments#
-						</p>
-			                 </td>
-			        </tr>
-		        </cfoutput>
-		</cfloop>                  
+		<tr><td>Loading</td></tr>
+
+<!---
 		<tr>
 			<td valign="top">
 			<p>
@@ -83,13 +48,9 @@ border:1px solid black;
 			</td>
 			<td valign="top">  
 			</td>
-		</tr>
+		</tr>--->
 	</tbody>
 </table>
 </div>
-
-       
-<!---<cfdump var="#CTquery#">--->
-<!---<cfdump var="#legacyScores#">--->
 
 
