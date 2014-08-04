@@ -1,6 +1,7 @@
 <script src="//assets.wwf.org.uk/custom/js/lib/require.js"></script>
+<cfoutput>
 <script>
-    define('config',function(){return{linkUrl:"country_scores.cfm"};})
+    define('config',function(){return{linkUrl:"#getCMSLink(3268)#"};})
     //Load common code that includes config, then load the app
     //logic for this page. Do the require calls here instead of
     //a separate file so after a build there are only 2 HTTP
@@ -12,6 +13,7 @@
         require(['app/scores_by_country']);
     });
 </script>
+</cfoutput>
 <style>
     .tier1{background-color: red}
     .tier2{background-color: yellow}
@@ -20,19 +22,19 @@
 <table id="results">
   <thead>
     <tr style="font-weight: bold;">
-    		<td style="color: rgb(1, 103, 62);" id="country">Country</td>
-    		<td align="center" style="color: rgb(1, 103, 62);" collspan="4" id="score">Score</td>
+        <td style="color: rgb(1, 103, 62);" id="country">Country</td>
+        <td align="center" style="color: rgb(1, 103, 62);" collspan="4" id="score">Score</td>
     </tr>
     <tr>
-    		<td></td>
+        <td></td>
 
-        <td align="center">2014</td>		
-    		
-    		<td align="center" >2012</td>
-    		
-    		<td align="center" >2007</td>
-    		
-    		<td align="center" >2006*</td>
+        <td align="center">2014</td>    
+        
+        <td align="center" >2012</td>
+        
+        <td align="center" >2007</td>
+        
+        <td align="center" >2006*</td>
 
     </tr>
   </thead>  

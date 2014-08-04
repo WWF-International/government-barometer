@@ -104,7 +104,8 @@ define(["d3","gapi"], function() {
                 var str=""; 
                 for (i=0;i<columns.length;i++){
                     if (typeof columns[i].linkUrl ==="string" ){
-                        str=str+ '<td><a href="' +columns[i].linkUrl +'?'+columns[i].linkParams.param + '='+ d[columns[i].linkParams.value]+ '">' + d[columns[i].columnName] +'</a></td>';
+                        var join = columns[i].linkUrl.indexOf('?')===-1 ? '?': '&'
+                        str=str+ '<td><a href="' +columns[i].linkUrl + join + columns[i].linkParams.param + '='+ d[columns[i].linkParams.value]+ '">' + d[columns[i].columnName] +'</a></td>';
                     }else{
                        str=str+ "<td>" +d[columns[i].columnName]+"</td>" ;
                     }
