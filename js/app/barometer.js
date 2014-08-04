@@ -270,7 +270,7 @@ define(["d3","gapi"], function() {
             sqlArgs = {
                 cmd    : 'select',
                 tableid: tables.questionInfo,
-                cols   : ['comment'],
+                cols   : ['comment', 'question'],
                 where: "'question number' ="  +  question 
             };
 

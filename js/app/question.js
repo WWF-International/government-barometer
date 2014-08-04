@@ -25,7 +25,8 @@ define(["app/barometer"], function(bar) {
 		bar.getQuestionInfo(question,function(status,results){
 			console.log(status, results)
 			if (status == "OK") {
-				bar.outputInfo("#info", results, prop )}
+				bar.outputInfo("#info", results, prop );
+				bar.outputInfo("#question", results, "question" )}
 			})
 
 				
