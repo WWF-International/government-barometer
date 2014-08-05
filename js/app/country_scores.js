@@ -1,4 +1,4 @@
-define(["app/barometer"], function(bar) {
+define(["config", "app/barometer"], function(config,bar) {
 
     //the d3 and the barometer (with dependencies) have been loaded.
 	"use strict";
@@ -8,6 +8,7 @@ define(["app/barometer"], function(bar) {
 
 	bar.getCountryScores(country,function (status, results) {
 		var i;
+
 		if (status == "OK") {
 		/*	for(i = 0; i < results.length; i++) {
 				console.log(results[i]);
@@ -19,15 +20,32 @@ define(["app/barometer"], function(bar) {
 			
 			]	;
 		var prop="description";
+		var total=0;
+		var score;
+		for (var j=0;j<results.length;j++){
+			score = parseInt(results[j].score);
+			if ( !isNaN(score)) {
+				results[j].tier= score+1;
+				total+=score;
+			}
+		}
+
 		bar.outputResults("#results tbody",results,columns);
 
 		}
+		
+		var linkUrl=config.linkUrl;
 		bar.getCountryInfo(country,function(status,results){
-		console.log(status, results)
+			console.log(linkUrl);
 		if (status == "OK") {
-			bar.outputInfo("#info", results, prop )
+			bar.outputInfo("#info", results, prop );
+			bar.outputInfo("#countryName", [{country:country}], "country" );
+			bar.outputInfo("#totalScore", [{totalScore:"Total rating of "+country+" is "+ total}], "totalScore" );
+			
+			var join = linkUrl.indexOf('?')===-1 ? '?': '&';
+			bar.outputInfo("#answersLink", [{answersLink:'<a href="'+linkUrl+ join+ 'country=' + country + '"">' +country + '</a>'}], "answersLink" );
 		}
-	})
+	});
 
 	},0);
 

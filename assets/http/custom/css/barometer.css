@@ -1,0 +1,18 @@
+    #results{width:100%;}
+    #results td {padding: 6px 0 0 10px;
+        border: 1px solid white;
+    }
+    #results th{border:1px solid black;
+        text-align:center;
+    }
+
+#score, #country{        
+    text-decoration: underline;
+    cursor: pointer;}
+
+    #results 
+    .tier1{background-color: #FACAC8;}
+    .tier2{background-color: #FAEEC8;}
+    .tier3{background-color: #C3D9C7;}
+
+#results a{text-decoration: underline;}

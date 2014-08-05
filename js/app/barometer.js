@@ -93,7 +93,7 @@ define(["d3","gapi"], function() {
         this.outputInfo = function(target, results, prop, cb){
             var p = d3.select(target)
                 .data(results)
-                .text(function(d){console.log(d);return d[prop]})
+                .html(function(d){console.log(d);return d[prop]})
 
             if (typeof cb==="function") {cb();}
         }
@@ -352,6 +352,6 @@ define(["d3","gapi"], function() {
 
     }
 
-    return new barometer('AIzaSyAO3KXQiVzbyaEAgDSxSeX2krQAERxJslY');    
-
+  //  return new barometer('AIzaSyAO3KXQiVzbyaEAgDSxSeX2krQAERxJslY');    
+        return new barometer('AIzaSyDFLxhbrA9V_dv8RgHvwPmMCZIwbY35l2E');
 });

@@ -14,27 +14,24 @@
     });
 </script>
 </cfoutput>
-<style>
-    .tier1{background-color: red}
-    .tier2{background-color: yellow}
-    .tier3{background-color: green}
-</style>
+<link rel="stylesheet" href="//assets.wwf.org.uk/custom/css/barometer.css" />
+
 <table id="results">
   <thead>
     <tr style="font-weight: bold;">
-        <td style="color: rgb(1, 103, 62);" id="country">Country</td>
-        <td align="center" style="color: rgb(1, 103, 62);" collspan="4" id="score">Score</td>
+        <th style="color: rgb(1, 103, 62);" id="country">Country</th>
+        <th style="color: rgb(1, 103, 62);" colspan="4" id="score">Score</th>
     </tr>
     <tr>
-        <td></td>
+        <th></th>
 
-        <td align="center">2014</td>    
+        <th align="center">2014</th>    
         
-        <td align="center" >2012</td>
+        <th align="center" >2012</th>
         
-        <td align="center" >2007</td>
+        <th align="center" >2007</th>
         
-        <td align="center" >2006*</td>
+        <th align="center" >2006*</th>
 
     </tr>
   </thead>  
