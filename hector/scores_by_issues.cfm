@@ -14,7 +14,7 @@
     });
 </script>
 </cfoutput>
-
+<link rel="stylesheet" href="//assets.wwf.org.uk/custom/css/barometer.css" />
 <table cellspacing="0" cellpadding="0" border="0" class="bodytext" id="results">
 
 	<thead>

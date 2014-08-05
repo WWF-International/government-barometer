@@ -17,7 +17,15 @@ define(["config","app/barometer"], function(config, bar) {
 			{columnName:"totalScore",columnSelector:"#score",defaultOrder:"DESC"}
 			
 			]	;
-		
+			var score;
+			for (var j=0;j<results.length;j++){
+				score = parseInt(results[j].totalScore);
+				if ( !isNaN(score)) {
+					results[j].tier= score>37.2 ? 3.0 : score>18.6 ? 2.0 : 1.0;
+
+				}
+		}	
+
 		bar.outputResults("#results tbody",results,columns );
 		
 		}
