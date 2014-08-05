@@ -11,7 +11,7 @@
         require(['app/question']);
     });
 </script>
-<div class="bodytext">
+<link rel="stylesheet" href="//assets.wwf.org.uk/custom/css/barometer.css" />
 <p id="question"></p>
 <p id="info"></p>	
 <table width=80% id="results">
@@ -22,7 +22,7 @@
 		</tr>
 	</thead>	
 	<tbody>
-		<tr>Loading</tr>
+		<tr><td>Loading</td></tr>
 	<tbody>
 </table>
 

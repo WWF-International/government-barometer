@@ -43,7 +43,7 @@ define(["config", "app/barometer"], function(config,bar) {
 			bar.outputInfo("#totalScore", [{totalScore:"Total rating of "+country+" is "+ total}], "totalScore" );
 			
 			var join = linkUrl.indexOf('?')===-1 ? '?': '&';
-			bar.outputInfo("#answersLink", [{answersLink:'<a href="'+linkUrl+ join+ 'country=' + country + '"">' +country + '</a>'}], "answersLink" );
+			bar.outputInfo("#answersLink", [{answersLink:'<a href="'+linkUrl+ join+ 'country=' + country + '"">Full details for ' +country + '</a>'}], "answersLink" );
 		}
 	});
 

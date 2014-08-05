@@ -31,24 +31,6 @@ border:1px solid black;
 	  </thead>
 	<tbody>
 		<tr><td>Loading</td></tr>
-
-<!---
-		<tr>
-			<td valign="top">
-			<p>
-			<b>Total score</b>
-			</p>
-			</td>
-			<td valign="top">
-			</td>
-			<td valign="top">
-			<p>
-			<cfoutput><b>#numberFormat(total_score,'_._')#</b> </cfoutput>
-			</p>
-			</td>
-			<td valign="top">  
-			</td>
-		</tr>--->
 	</tbody>
 </table>
 </div>

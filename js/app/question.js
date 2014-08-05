@@ -17,7 +17,16 @@ define(["app/barometer"], function(bar) {
 			{columnName:"score",columnSelector:"#score",defaultOrder:"DESC"}
 			
 			]	;
-		var prop = "comment"	
+		var prop = "comment";
+		var total=0;
+		var score;
+		for (var j=0;j<results.length;j++){
+			score = parseInt(results[j].score);
+			if ( !isNaN(score)) {
+				results[j].tier= score+1;
+				total+=score;
+			}
+		}
 		
 		bar.outputResults("#results tbody",results,columns );
 		
