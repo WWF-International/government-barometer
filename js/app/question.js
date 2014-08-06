@@ -6,7 +6,7 @@ define(["app/barometer"], function(bar) {
 	var question = decodeURIComponent(bar._utils.GetQueryVariable(location.search,"issue"));
 	question = question || 1;
 
-	bar.getQuestion(1,function (status, results) {
+	bar.getQuestion(question,function (status, results) {
 		var i;
 		if (status == "OK") {
 		/*	for(i = 0; i < results.length; i++) {
