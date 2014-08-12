@@ -16,7 +16,7 @@ define(["app/barometer"], function(bar) {
 			{columnName:"question",columnSelector:"#question",defaultOrder:"ASC",sortType:"delegated",sortProxy:"question number"},
 			{columnName:"answer",columnSelector:"#answer",defaultOrder:"DESC", sortType:"alpha"},
 			{columnName:"score",columnSelector:"#score",defaultOrder:"DESC"},
-			{columnName:"comment",columnSelector:"#comment",defaultOrder:"ASC",sortType:"delegated",sortProxy:"question number"}
+			{columnName:"Comments",columnSelector:"#comment",defaultOrder:"ASC",sortType:"delegated",sortProxy:"question number"}
 			
 			]	;
 		

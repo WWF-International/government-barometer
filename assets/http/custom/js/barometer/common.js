@@ -6,7 +6,8 @@ requirejs.config({
     "baseUrl": "//assets.wwf.org.uk/custom/js/lib",
     "paths": {
       "app": "../barometer",
-      "d3":"d3.min"
+      "d3":"d3.min",
+      "urlArgs": "bust=v201408060940"
     },
     "shim": {
        // "jquery.alpha": ["jquery"],

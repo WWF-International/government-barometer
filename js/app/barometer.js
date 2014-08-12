@@ -197,7 +197,7 @@ define(["d3","gapi"], function() {
             sqlArgs = {
                 cmd    : 'select',
                 tableid: tables.answerJOINquestions,
-                cols   : ['question', 'answer', 'score', 'comment',"'question number'"],
+                cols   : ['question', 'answer', 'score', 'Comments',"'question number'"],
                 orderby: "'question number' ASC",
                 where: 'country = ' + "'" +country+"'"
             };
